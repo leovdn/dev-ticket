@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { Partner2Controller } from './partner2.controller';
-import { Partner2Service } from './partner2.service';
+import { ConfigModule } from '@nestjs/config';
+import { EventsModule } from './events/events.module';
+import { SpotsModule } from './spots/spots.module';
 
 @Module({
-  imports: [],
-  controllers: [Partner2Controller],
-  providers: [Partner2Service],
+  imports: [
+    ConfigModule.forRoot({ envFilePath: '.env.partner2' }),
+    EventsModule,
+    SpotsModule,
+  ],
 })
 export class Partner2Module {}
