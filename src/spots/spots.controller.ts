@@ -20,7 +20,10 @@ export class SpotsController {
     @Body() createSpotDto: CreateSpotDto,
     @Param('eventId') eventId: string,
   ) {
-    return this.spotsService.create(createSpotDto);
+    return this.spotsService.create({
+      ...createSpotDto,
+      eventId,
+    });
   }
 
   @Get()
