@@ -17,18 +17,34 @@ export class EventsService {
   }
 
   findAll() {
-    return `This action returns all events`;
+    return this.prismaService.event.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  findOne(id: string) {
+    return this.prismaService.event.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  update(id: string, updateEventDto: UpdateEventDto) {
+    return this.prismaService.event.update({
+      data: {
+        ...updateEventDto,
+        date: new Date(updateEventDto.date),
+      },
+      where: {
+        id,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  remove(id: string) {
+    return this.prismaService.event.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
