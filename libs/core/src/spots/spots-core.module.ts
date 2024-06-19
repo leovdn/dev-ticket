@@ -4,4 +4,4 @@ import { SpotsService } from './spots.service';
 @Module({
   providers: [SpotsService],
 })
-export class SpotsModule {}
+export class SpotsCoreModule {}
