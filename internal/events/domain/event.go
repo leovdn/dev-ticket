@@ -9,33 +9,40 @@ import (
 
 var (
 	ErrEventNameRequired = errors.New("Event name is required")
-	ErrEventDateFuture = errors.New("Event date must be in the future")
+	ErrEventDateFuture   = errors.New("Event date must be in the future")
 	ErrEventCapacityZero = errors.New("Event capacity must be greater than zero (0)")
-	ErrEventPriceZero = errors.New("Event price must be greater than zero (0)")
+	ErrEventPriceZero    = errors.New("Event price must be greater than zero (0)")
+	ErrInvalidEvent      = errors.New("invalid event data")
+	ErrEventFull         = errors.New("event is full")
+	ErrTicketNotFound    = errors.New("ticket not found")
+	ErrTicketNotEnough   = errors.New("not enough tickets available")
+	ErrEventNotFound     = errors.New("event not found")
 )
+
 type Rating string
+
 const (
 	RatingFree Rating = "L"
-	Rating10 Rating = "L10"
-	Rating12 Rating = "L12"
-	Rating14 Rating = "L14"
-	Rating16 Rating = "L16"
-	Rating18 Rating = "L18"
+	Rating10   Rating = "L10"
+	Rating12   Rating = "L12"
+	Rating14   Rating = "L14"
+	Rating16   Rating = "L16"
+	Rating18   Rating = "L18"
 )
 
 type Event struct {
-	ID string
-	Name string
-	Location string
+	ID           string
+	Name         string
+	Location     string
 	Organization string
-	Rating Rating
-	Date time.Time
-	ImageURL string
-	Capacity int
-	Price float64
-	PartnerID int
-	Spots []Spot
-	Tickets []Ticket
+	Rating       Rating
+	Date         time.Time
+	ImageURL     string
+	Capacity     int
+	Price        float64
+	PartnerID    int
+	Spots        []Spot
+	Tickets      []Ticket
 }
 
 func (e Event) Validate() error {
@@ -78,7 +85,6 @@ func NewEvent(name, location, organization string, rating Rating, date time.Time
 	}
 	return event, nil
 }
-
 
 func (e *Event) AddSpot(name string) (*Spot, error) {
 	spot, err := NewSpot(e, name)
