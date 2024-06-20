@@ -4,24 +4,73 @@ import { Title } from '@/app/components/Title'
 import { EventModel, SpotModel } from '@/models'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
+import { TicketKindSelect } from './TicketKindSelect'
 
-export default async function SpotsLayoutPage() {
-  const event: EventModel = {
-    id: '1',
-    name: 'Bring Me The Horizon',
-    organization: 'Bring Me The Horizon',
-    date: '2024-05-11T20:00:00.000Z',
-    location: 'São Paulo, SP',
-    price: 0,
-    rating: '',
-    image_url: '',
-  }
+export async function getSpots(eventId: string): Promise<{
+  event: EventModel
+  spots: SpotModel[]
+}> {
+  const response = await fetch(
+    `http://localhost:8080/events/${eventId}/spots`,
+    {
+      cache: 'no-store',
+      next: {
+        tags: [`events/${eventId}`],
+      },
+    }
+  )
 
-  const spot: SpotModel = {
-    name: 'A1',
-    id: '1',
-    status: 'available',
+  return response.json()
+}
+
+export default async function SpotsLayoutPage({
+  params,
+}: {
+  params: { eventId: string }
+}) {
+  const { event, spots } = await getSpots(params.eventId)
+
+  const rowLetters = spots.map((spot) => spot.name[0])
+  const uniqueRows = rowLetters.filter(
+    (row, index) => rowLetters.indexOf(row) === index
+  )
+
+  const spotGroupedByRow = uniqueRows.map((row) => {
+    return {
+      row,
+      spots: [
+        ...spots
+          .filter((spot) => spot.name[0] === row)
+          .sort((a, b) => {
+            const aNumber = parseInt(a.name.slice(1))
+            const bNumber = parseInt(b.name.slice(1))
+
+            if (aNumber < bNumber) {
+              return -1
+            }
+
+            if (aNumber > bNumber) {
+              return 1
+            }
+
+            return 0
+          }),
+      ],
+    }
+  })
+
+  const cookieStore = cookies()
+  const selectedSpots = JSON.parse(cookieStore.get('spots')?.value || '[]')
+  let totalPrice = selectedSpots.length * event.price
+  const ticketKind = cookieStore.get('ticketKind')?.value || 'full'
+
+  if (ticketKind === 'half') {
+    totalPrice = totalPrice / 2
   }
+  const formattedTotalPrice = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(totalPrice)
 
   return (
     <main className="mt-10">
@@ -60,19 +109,30 @@ export default async function SpotsLayoutPage() {
             Palco
           </div>
           <div className="md:w-full md:justify-normal">
-            <div className="flex flex-row gap-3 items-center mb-3">
-              <div className="w-4">A</div>
-              <div className="ml-2 flex flex-row">
-                <SpotSeat
-                  key={spot.name}
-                  spotId={spot.name}
-                  spotLabel={spot.name.slice(1)}
-                  eventId={event.id}
-                  disabled={spot.status === 'sold'}
-                  selected={false}
-                />
-              </div>
-            </div>
+            {spotGroupedByRow.map((row) => {
+              return (
+                <div
+                  key={row.row}
+                  className="flex flex-row gap-3 items-center mb-3"
+                >
+                  <div className="w-4">{row.row}</div>
+                  <div className="ml-2 flex flex-row">
+                    {row.spots.map((spot) => {
+                      return (
+                        <SpotSeat
+                          key={spot.name}
+                          spotId={spot.name}
+                          spotLabel={spot.name.slice(1)}
+                          eventId={event.id}
+                          selected={selectedSpots.includes(spot.name)}
+                          disabled={spot.status === 'sold'}
+                        />
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
           </div>
           <div className="flex w-full flex-row justify-around">
             <div className=" flex flex-row items-center">
@@ -98,12 +158,12 @@ export default async function SpotsLayoutPage() {
             Meia-entrada: {`R$ 50,00`}
           </p>
           <div className="flex flex-col">
-            {/* <TicketKindSelect
+            <TicketKindSelect
               defaultValue={ticketKind as any}
               price={event.price}
-            /> */}
+            />
           </div>
-          <div>Total: {event.price}</div>
+          <div>Total: {formattedTotalPrice}</div>
           <Link
             href="/checkout"
             className="rounded-lg bg-btn-primary py-4 text-sm font-semibold uppercase text-btn-primary text-center hover:bg-[#fff]"
