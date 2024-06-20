@@ -21,6 +21,9 @@ const config: Config = {
     textColor: {
       default: '#a6adbb',
     },
+    gridTemplateColumns: {
+      'auto-fit-cards': 'repeat(auto-fit, minmax(277px, 1fr))',
+    },
   },
   plugins: [],
 }
