@@ -32,8 +32,29 @@
 
 ## Infrastructure / Repository - DataBase Access
 
-- [ ] Repository
-  - [ ] ListEvents
-  - [ ] FindEventByID
-  - [ ] CreateSpot
-  - [ ] CreateTicket
+- [x] Repository
+  - [x] ListEvents
+  - [x] FindEventByID
+  - [x] CreateSpot
+  - [x] CreateTicket
+  - [x] ReserveSpot
+  - [x] FindSpotsByEventID
+  - [x] FindSpotsByName
+
+## Usecases
+
+- [ ] ListEvents
+- [ ] GetEvent
+- [ ] ListSpots
+- [ ] BuyTickets
+
+## Infrastructure / HTTP Handlers
+
+- [ ] ListEvents
+- [ ] GetEvent
+- [ ] ListSpots
+- [ ] BuyTickets
+
+## Main
+
+- [ ] Entrypoint
