@@ -50,11 +50,11 @@
 
 ## Infrastructure / HTTP Handlers
 
-- [ ] ListEvents
-- [ ] GetEvent
-- [ ] ListSpots
-- [ ] BuyTickets
+- [x] ListEvents
+- [x] GetEvent
+- [x] ListSpots
+- [x] BuyTickets
 
 ## Main
 
-- [ ] Entrypoint
+- [x] Entrypoint
