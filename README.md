@@ -8,12 +8,12 @@
 
 - [x] Event
 
-  - [ ] Validate
-  - [ ] AddSpot (add spots into event)
+  - [x] Validate
+  - [x] AddSpot (add spots into event)
 
 - [ ] Spot
 
-  - [ ] Validate
+  - [x] Validate
   - [ ] Reserve (seat reservation - purchase process)
   - [ ] Domain Service: GenerateSpots
 
