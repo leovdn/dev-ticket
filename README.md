@@ -11,18 +11,18 @@
   - [x] Validate
   - [x] AddSpot (add spots into event)
 
-- [ ] Spot
+- [x] Spot
 
   - [x] Validate
-  - [ ] Reserve (seat reservation - purchase process)
-  - [ ] Domain Service: GenerateSpots
+  - [x] Reserve (seat reservation - purchase process)
+  - [x] Domain Service: GenerateSpots
 
-- [ ] Ticket
+- [x] Ticket
 
-  - [ ] Validate
-  - [ ] Calculate Price
+  - [x] Validate
+  - [x] Calculate Price
 
-- [ ] External Access Definition (Repository)
+- [x] External Access Definition (Repository)
 
 ## Infrastructure / Service - Parners API
 
