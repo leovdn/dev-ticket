@@ -68,8 +68,8 @@ export default async function SpotsLayoutPage() {
                   spotId={spot.name}
                   spotLabel={spot.name.slice(1)}
                   eventId={event.id}
-                  // selected={spot.name}
                   disabled={spot.status === 'sold'}
+                  selected={false}
                 />
               </div>
             </div>
