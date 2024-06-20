@@ -26,9 +26,9 @@
 
 ## Infrastructure / Service - Parners API
 
-- [ ] Partner 1
-- [ ] Partner 2
-- [ ] Factory
+- [x] Partner 1
+- [x] Partner 2
+- [x] Factory
 
 ## Infrastructure / Repository - DataBase Access
 
@@ -43,10 +43,10 @@
 
 ## Usecases
 
-- [ ] ListEvents
-- [ ] GetEvent
-- [ ] ListSpots
-- [ ] BuyTickets
+- [x] ListEvents
+- [x] GetEvent
+- [x] ListSpots
+- [x] BuyTickets
 
 ## Infrastructure / HTTP Handlers
 
