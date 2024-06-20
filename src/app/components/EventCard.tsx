@@ -1,4 +1,5 @@
 import { EventModel } from '@/models'
+import Link from 'next/link'
 
 export type EventCardProps = {
   event: EventModel
@@ -17,12 +18,14 @@ export default function EventCard({ event }: EventCardProps) {
 
   return (
     <div className="flex w-[277px] flex-col rounded-2xl bg-secondary">
-      <img src={image_url} alt={name} />
-      <div className="flex flex-col gap-y-2 px-4 py-6">
-        <p className="text-sm uppercase text-subtitle">{formattedDate}</p>
-        <p className="font-semibold">{name}</p>
-        <p className="text-sm font-normal">{location}</p>
-      </div>
+      <Link href={`/event/${id}/spots-layout`}>
+        <img src={image_url} alt={name} />
+        <div className="flex flex-col gap-y-2 px-4 py-6">
+          <p className="text-sm uppercase text-subtitle">{formattedDate}</p>
+          <p className="font-semibold">{name}</p>
+          <p className="text-sm font-normal">{location}</p>
+        </div>
+      </Link>
     </div>
   )
 }
