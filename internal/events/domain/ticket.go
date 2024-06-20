@@ -1,6 +1,10 @@
 package domain
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/google/uuid"
+)
 
 type TicketType string
 const (
@@ -10,6 +14,7 @@ const (
 
 var (
 	ErrTicketPriceZero = errors.New("Ticket price must be greater than zero (0)")
+	ErrInvalidTicketType = errors.New("invalid ticket type")
 )
 
 type Ticket struct {
@@ -36,4 +41,27 @@ func (t *Ticket) Validate() error {
 	}
 
 	return nil
+}
+
+// NewTicket creates a new ticket with the given parameters.
+func NewTicket(event *Event, spot *Spot, ticketType TicketType) (*Ticket, error) {
+	if !IsValidTicketType(ticketType) {
+		return nil, ErrInvalidTicketType
+	}
+
+	ticket := &Ticket{
+		ID:         uuid.New().String(),
+		EventID:    event.ID,
+		Spot:       spot,
+		TicketType: ticketType,
+		Price:      event.Price,
+	}
+
+	ticket.CalculatePrice()
+
+	if err := ticket.Validate(); err != nil {
+		return nil, err
+	}
+
+	return ticket, nil
 }
