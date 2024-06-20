@@ -7,6 +7,8 @@ import (
 )
 
 var (
+	ErrSpotAlreadyReserved = errors.New("Spot already reserved")
+	ErrSpotNotFound = errors.New("Spot not found")
 	ErrSpotNameRequired = errors.New("Spot name is required")
 	ErrSpotNameTwoCharacters = errors.New("Spot name must be at least 2 characters long")
 	ErrSpotNameStartsWithLetter = errors.New("Spot name must start with a letter")
@@ -56,5 +58,15 @@ func (s *Spot) Validate() error {
 	if s.Name[1] < '0' || s.Name[1] > '9' {
 		return ErrSpotNameEndsWithNumber
 	}
+	return nil
+}
+
+func (s *Spot) Reserve(ticketID string) error {
+	if s.Status == SpotStatusSold {
+		return ErrSpotAlreadyReserved
+	}
+
+	s.Status = SpotStatusSold
+	s.TicketID = ticketID
 	return nil
 }
