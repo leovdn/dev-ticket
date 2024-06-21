@@ -1,26 +1,37 @@
 import { cookies } from 'next/headers'
+import { Title } from '../../components/Title'
 import { redirect } from 'next/navigation'
 import { EventModel } from '../../models'
-import { Title } from '../components/Title'
+import { CheckoutForm } from './CheckoutForm'
+
+export async function getEvent(eventId: string): Promise<EventModel> {
+  const response = await fetch(`http://localhost:8080/events/${eventId}`, {
+    cache: 'no-store',
+    next: {
+      tags: [`events/${eventId}`],
+    },
+  })
+
+  return response.json()
+}
 
 export default async function CheckoutPage() {
-  const event: EventModel = {
-    id: '1',
-    name: 'Bring Me The Horizon',
-    organization: 'Organization 1',
-    date: '2024-12-01T00:00:00',
-    price: 200,
-    rating: '4.9',
-    image_url: 'https://unsplash.com/photos/9b9c5b9b0d1',
-    location: 'São Paulo, SP',
-  }
-
   const cookiesStore = cookies()
   const eventId = cookiesStore.get('eventId')?.value
   if (!eventId) {
     return redirect('/')
   }
-
+  const event = await getEvent(eventId)
+  const selectedSpots = JSON.parse(cookiesStore.get('spots')?.value || '[]')
+  let totalPrice = selectedSpots.length * event.price
+  const ticketKind = cookiesStore.get('ticketKind')?.value
+  if (ticketKind === 'half') {
+    totalPrice = totalPrice / 2
+  }
+  const formattedTotalPrice = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(totalPrice)
   return (
     <main className="mt-10 flex flex-wrap justify-center md:justify-between">
       <div className="mb-4 flex max-h-[250px] w-full max-w-[478px] flex-col gap-y-6 rounded-2xl bg-secondary p-4">
@@ -37,11 +48,11 @@ export default async function CheckoutPage() {
             year: 'numeric',
           })}
         </p>
-        <p className="font-semibold text-white">200</p>
+        <p className="font-semibold text-white">{formattedTotalPrice}</p>
       </div>
       <div className="w-full max-w-[650px] rounded-2xl bg-secondary p-4">
         <Title>Informações de pagamento</Title>
-        <form className="mt-6 flex flex-col gap-y-3">
+        <CheckoutForm className="mt-6 flex flex-col gap-y-3">
           <div className="flex flex-col">
             <label htmlFor="titular">E-mail</label>
             <input
@@ -87,7 +98,7 @@ export default async function CheckoutPage() {
           <button className="rounded-lg bg-btn-primary py-4 px-4 text-sm font-semibold uppercase text-btn-primary">
             Finalizar pagamento
           </button>
-        </form>
+        </CheckoutForm>
       </div>
     </main>
   )

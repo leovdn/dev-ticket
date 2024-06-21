@@ -1,10 +1,10 @@
-import { EventImage } from '@/app/components/EventImage'
-import { SpotSeat } from '@/app/components/SpotSeat'
-import { Title } from '@/app/components/Title'
-import { EventModel, SpotModel } from '@/models'
-import { cookies } from 'next/headers'
 import Link from 'next/link'
+import { Title } from '../../../../components/Title'
+import { EventModel, SpotModel } from '../../../../models'
+import { SpotSeat } from '../../../../components/SpotSeat'
 import { TicketKindSelect } from './TicketKindSelect'
+import { cookies } from 'next/headers'
+import { EventImage } from '../../../../components/EventImage'
 
 export async function getSpots(eventId: string): Promise<{
   event: EventModel
@@ -30,7 +30,10 @@ export default async function SpotsLayoutPage({
 }) {
   const { event, spots } = await getSpots(params.eventId)
 
+  //[a, a, a, b, b,  c, d]
   const rowLetters = spots.map((spot) => spot.name[0])
+
+  //[a, b, c, d]
   const uniqueRows = rowLetters.filter(
     (row, index) => rowLetters.indexOf(row) === index
   )

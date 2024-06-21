@@ -1,6 +1,6 @@
 'use client'
 
-import { selectTicketTypeAction } from '@/actions'
+import { selectTicketTypeAction } from '../../../../actions'
 
 export type TicketKindSelectProps = {
   defaultValue: 'full' | 'half'
