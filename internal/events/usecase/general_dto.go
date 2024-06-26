@@ -1,6 +1,5 @@
 package usecase
 
-
 type EventDTO struct {
 	ID           string  `json:"id"`
 	Name         string  `json:"name"`
@@ -14,7 +13,6 @@ type EventDTO struct {
 	ImageURL     string  `json:"image_url"`
 }
 
-
 type SpotDTO struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
@@ -27,6 +25,6 @@ type SpotDTO struct {
 type TicketDTO struct {
 	ID         string  `json:"id"`
 	SpotID     string  `json:"spot_id"`
-	TicketType string  `json:"ticket_type"`
+	TicketKind string  `json:"ticket_kind"`
 	Price      float64 `json:"price"`
 }
