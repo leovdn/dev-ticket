@@ -1,16 +1,12 @@
-FROM node:18.19.1
-
-WORKDIR /home/node/app
-
-RUN chown -R node:node /home/node/app
-
-COPY --chown=node:node package.json .
+FROM node:21-slim
 
 RUN apt update && apt install -y openssl procps
 
+RUN npm install -g @nestjs/cli@10.3.2
+
 RUN npm install
 
-COPY --chown=node:node . .
+WORKDIR /home/node/app
 
 USER node
 
