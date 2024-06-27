@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/leovdn/api-sell-golang/internal/events/domain"
+import "github.com/leovdn/dev-ticket/backend-golang/internal/events/domain"
 
 type GetEventInputDTO struct {
 	ID string
@@ -17,7 +17,6 @@ type GetEventOutputDTO struct {
 	Price        float64 `json:"price"`
 	PartnerID    int     `json:"partner_id"`
 }
-
 
 type GetEventUseCase struct {
 	repo domain.EventRepository

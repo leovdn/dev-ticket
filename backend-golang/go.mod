@@ -1,4 +1,4 @@
-module github.com/leovdn/api-sell-golang
+module github.com/leovdn/dev-ticket/backend-golang
 
 go 1.22.3
 

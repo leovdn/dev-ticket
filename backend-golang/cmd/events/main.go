@@ -11,10 +11,10 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-	httpHandler "github.com/leovdn/api-sell-golang/internal/events/infra/http"
-	"github.com/leovdn/api-sell-golang/internal/events/infra/repository"
-	"github.com/leovdn/api-sell-golang/internal/events/infra/service"
-	"github.com/leovdn/api-sell-golang/internal/events/usecase"
+	httpHandler "github.com/leovdn/dev-ticket/backend-golang/internal/events/infra/http"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/infra/repository"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/infra/service"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/usecase"
 
 	httpSwagger "github.com/swaggo/http-swagger"
 )

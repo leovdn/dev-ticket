@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/leovdn/api-sell-golang/internal/events/domain"
+import "github.com/leovdn/dev-ticket/backend-golang/internal/events/domain"
 
 type ListEventsOutputDTO struct {
 	Events []EventDTO `json:"events"`

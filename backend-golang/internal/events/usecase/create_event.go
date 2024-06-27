@@ -3,7 +3,7 @@ package usecase
 import (
 	"time"
 
-	"github.com/leovdn/api-sell-golang/internal/events/domain"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/domain"
 )
 
 // CreateEventInputDTO represents the input data required to create an event.

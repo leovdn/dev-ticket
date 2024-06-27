@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"github.com/leovdn/api-sell-golang/internal/events/domain"
-	"github.com/leovdn/api-sell-golang/internal/events/infra/service"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/domain"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/infra/service"
 )
 
 type BuyTicketsInputDTO struct {

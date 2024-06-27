@@ -3,7 +3,7 @@ package usecase
 import (
 	"fmt"
 
-	"github.com/leovdn/api-sell-golang/internal/events/domain"
+	"github.com/leovdn/dev-ticket/backend-golang/internal/events/domain"
 )
 
 type CreateSpotsInputDTO struct {

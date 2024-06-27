@@ -1,6 +1,6 @@
 package usecase
 
-import "github.com/leovdn/api-sell-golang/internal/events/domain"
+import "github.com/leovdn/dev-ticket/backend-golang/internal/events/domain"
 
 type ListSpotsInputDTO struct {
 	EventID string `json:"event_id"`
@@ -10,7 +10,6 @@ type ListSpotsOutputDTO struct {
 	Event EventDTO  `json:"event"`
 	Spots []SpotDTO `json:"spots"`
 }
-
 
 type ListSpotsUseCase struct {
 	repo domain.EventRepository
