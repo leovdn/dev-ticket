@@ -3,7 +3,7 @@ import { Title } from '../components/Title'
 import { EventModel } from '../models'
 
 export async function getEvents(): Promise<EventModel[]> {
-  const response = await fetch(`${process.env.GOLANG_API_URL}/events}`, {
+  const response = await fetch(`${process.env.GOLANG_API_URL}/events`, {
     headers: {
       apikey: process.env.GOLANG_API_TOKEN as string,
     },
