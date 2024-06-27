@@ -1,0 +1,5 @@
+include:
+  - api-partners-nestjs/docker-compose.yaml
+  - backend-golang/docker-compose.yaml
+  - web-nextjs/docker-compose.yaml
+  - gateway-api-kong/docker-compose.yaml
