@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/nextjs',
   images: {
     remotePatterns: [
       {
@@ -7,6 +8,11 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['http://localhost:8000'],
+    },
   },
 }
 

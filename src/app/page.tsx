@@ -3,7 +3,10 @@ import { Title } from '../components/Title'
 import { EventModel } from '../models'
 
 export async function getEvents(): Promise<EventModel[]> {
-  const response = await fetch('http://localhost:8080/events', {
+  const response = await fetch(`${process.env.GOLANG_API_URL}/events}`, {
+    headers: {
+      apikey: process.env.GOLANG_API_TOKEN as string,
+    },
     cache: 'no-store',
     // next: {
     //   tags: ["events"],
@@ -15,7 +18,7 @@ export async function getEvents(): Promise<EventModel[]> {
 
 export default async function HomePage() {
   const events = await getEvents()
-  console.log(events)
+
   return (
     <main className="mt-10 flex flex-col">
       <Title>Eventos disponíveis</Title>
