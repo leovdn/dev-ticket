@@ -1,5 +1,6 @@
 services:
   golang:
+    command: go run cmd/events/main.go
     build: .
     ports:
       - '8080:8080'

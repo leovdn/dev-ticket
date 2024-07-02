@@ -1,5 +1,6 @@
 services:
   nextjs:
+    command: npm run dev
     build: .
     ports:
       - 3002:3000
